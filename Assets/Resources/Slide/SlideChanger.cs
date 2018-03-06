@@ -7,31 +7,58 @@ public class SlideChanger : MonoBehaviour {
 
 	public GameObject targetScreen;
 	private List<string> slideList = new List<string>();
-	private Material currentSlide;
+	private Texture2D slideTexture;
+	public Material currentSlideMaterial;
+	private int currentSlideNum = 0;
+	private int slideNum = 0;
 
 	// Use this for initialization
 	void Start () {
-		GetTextureList (slideList, "Assets/Resources/Slide/");
-		//currentSlide.SetTexture ("_BumpMap", slideList [0]);
-		foreach (string path in slideList) 
-		{
-			Debug.Log (path);	
-		}
+		GetTexturePathList (slideList, "Assets/Resources/Slide/");
+		slideNum = slideList.Count;
+		slideTexture = Resources.Load<Texture2D>(slideList [currentSlideNum]);
+		currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
+		targetScreen.GetComponent<Renderer>().material = currentSlideMaterial;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKeyUp(KeyCode.RightArrow)) 
+		{
+			currentSlideNum++;
+			if (currentSlideNum > slideNum-1) 
+			{
+				currentSlideNum = slideNum-1;
+			}
+
+			slideTexture = Resources.Load<Texture2D> (slideList [currentSlideNum]);
+			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
+			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+		}
+
+		if (Input.GetKeyUp(KeyCode.LeftArrow)) 
+		{
+			currentSlideNum--;
+			if (currentSlideNum < 0) 
+			{
+				currentSlideNum = 0;
+			}
+			slideTexture = Resources.Load<Texture2D> (slideList [currentSlideNum]);
+			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
+			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+		}
 	}
 
-	public void GetTextureList(List<string> slideList, string filepath)
+	public void GetTexturePathList(List<string> slideList, string filepath)
 	{
 
 		string[] files = Directory.GetFiles(filepath, "*.jpg" );
-		foreach (var file in files)
+		string baseName = "";
+		foreach (string file in files)
 		{
-			slideList.Add(file);
+			baseName = Path.GetFileNameWithoutExtension (file);
+			slideList.Add("Slide/" + baseName);
 		}
-			
+		slideList.Sort ();
 	}
 }
