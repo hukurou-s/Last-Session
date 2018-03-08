@@ -47,6 +47,20 @@ public class SlideChanger : MonoBehaviour {
 			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
 			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
 		}
+
+		if (Input.GetKeyUp(KeyCode.UpArrow)) 
+		{
+			slideTexture = Resources.Load<Texture2D> ("Slide/sub/maru");
+			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
+			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+		}
+
+		if (Input.GetKeyUp(KeyCode.DownArrow)) 
+		{
+			slideTexture = Resources.Load<Texture2D> ("Slide/sub/batu");
+			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
+			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+		}
 	}
 
 	public void GetTexturePathList(List<string> slideList, string filepath)
