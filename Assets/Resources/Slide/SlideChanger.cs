@@ -16,9 +16,7 @@ public class SlideChanger : MonoBehaviour {
 	void Start () {
 		GetTexturePathList (slideList, "Assets/Resources/Slide/");
 		slideNum = slideList.Count;
-		slideTexture = Resources.Load<Texture2D>(slideList [currentSlideNum]);
-		currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
-		targetScreen.GetComponent<Renderer>().material = currentSlideMaterial;
+		ChangeScreenSlide(slideList [currentSlideNum]);
 	}
 	
 	// Update is called once per frame
@@ -30,10 +28,7 @@ public class SlideChanger : MonoBehaviour {
 			{
 				currentSlideNum = slideNum-1;
 			}
-
-			slideTexture = Resources.Load<Texture2D> (slideList [currentSlideNum]);
-			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
-			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+			ChangeScreenSlide(slideList [currentSlideNum]);
 		}
 
 		if (Input.GetKeyUp(KeyCode.LeftArrow)) 
@@ -43,23 +38,17 @@ public class SlideChanger : MonoBehaviour {
 			{
 				currentSlideNum = 0;
 			}
-			slideTexture = Resources.Load<Texture2D> (slideList [currentSlideNum]);
-			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
-			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+			ChangeScreenSlide(slideList [currentSlideNum]);
 		}
 
 		if (Input.GetKeyUp(KeyCode.UpArrow)) 
 		{
-			slideTexture = Resources.Load<Texture2D> ("Slide/sub/maru");
-			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
-			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+			ChangeScreenSlide("Slide/sub/maru");
 		}
 
 		if (Input.GetKeyUp(KeyCode.DownArrow)) 
 		{
-			slideTexture = Resources.Load<Texture2D> ("Slide/sub/batu");
-			currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
-			targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
+			ChangeScreenSlide("Slide/sub/batu");
 		}
 	}
 
@@ -74,5 +63,12 @@ public class SlideChanger : MonoBehaviour {
 			slideList.Add("Slide/" + baseName);
 		}
 		slideList.Sort ();
+	}
+
+	public void ChangeScreenSlide(string filepath) 
+	{
+		slideTexture = Resources.Load<Texture2D> (filepath);
+		currentSlideMaterial.SetTexture ("_MainTex", slideTexture);
+		targetScreen.GetComponent<Renderer> ().material = currentSlideMaterial;
 	}
 }
