@@ -21,7 +21,7 @@ public class SlideChanger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyUp(KeyCode.RightArrow)) 
+		if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.Joystick1Button0)) 
 		{
 			currentSlideNum++;
 			if (currentSlideNum > slideNum-1) 
@@ -31,7 +31,7 @@ public class SlideChanger : MonoBehaviour {
 			ChangeScreenSlide(slideList [currentSlideNum]);
 		}
 
-		if (Input.GetKeyUp(KeyCode.LeftArrow)) 
+		if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.Joystick1Button3))
 		{
 			currentSlideNum--;
 			if (currentSlideNum < 0) 
@@ -41,12 +41,12 @@ public class SlideChanger : MonoBehaviour {
 			ChangeScreenSlide(slideList [currentSlideNum]);
 		}
 
-		if (Input.GetKeyUp(KeyCode.UpArrow)) 
+		if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Joystick1Button4)) 
 		{
 			ChangeScreenSlide("Slide/sub/maru");
 		}
 
-		if (Input.GetKeyUp(KeyCode.DownArrow)) 
+		if (Input.GetKeyUp(KeyCode.DownArrow)|| Input.GetKeyUp(KeyCode.Joystick1Button2)) 
 		{
 			ChangeScreenSlide("Slide/sub/batu");
 		}
