@@ -41,7 +41,7 @@ public class SlideChanger : MonoBehaviour {
 			ChangeScreenSlide(slideList [currentSlideNum]);
 		}
 
-		if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Joystick1Button4)) 
+		if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.Joystick1Button1)) 
 		{
 			ChangeScreenSlide("Slide/sub/maru");
 		}
